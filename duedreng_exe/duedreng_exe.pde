@@ -3,8 +3,9 @@ PImage startup;
 int DIAMETER = 80, hastighed = 4;
 PFont Titelfont;
 PFont Lilletitelfont;
-Player p;
+Player[] p;
 int Niveau;
+int dueAmount =2; 
  
 void setup() {
   size(1920, 1080);
@@ -14,25 +15,38 @@ void setup() {
  Lilletitelfont = createFont("Arial",34);
 
   smooth(8);
-  frameRate(90);
+  frameRate(1000);
   ellipseMode(CENTER);
-  p = new Player(width, height, DIAMETER, hastighed);
+  p= new Player[100];
+ for(int i = 0;i<100;i++)
+  p[i] = new Player((int)random(0,1920), (int)random(0,1080), DIAMETER, hastighed);
   Niveau = 0;
 }
  
 void draw() {
   
   //background(0,255,0);
-  p.move();
-  p.display();
-  p.simulate();
+       background(53,101,77);
+   for(int i = 0;i<dueAmount;i++){
+   
+  p[i].move();
+  p[i].display();
+  p[i].simulate();
+   }
+  //text(frameRate,500,500);
 }
  
 void keyPressed() {
-  p.setMove(keyCode, true);
+     for(int i = 0;i<dueAmount;i++){
+ p[i].setMove(keyCode, true,i);
+   }
+ 
 }
  
 void keyReleased() {
-  p.setMove(keyCode, false);
+       for(int i = 0;i<dueAmount;i++){
+  p[i].setMove(keyCode, false,i);
+   }
+
 }
  

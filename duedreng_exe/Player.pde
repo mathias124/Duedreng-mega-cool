@@ -4,12 +4,17 @@
   int x, y;
   int d, v;
  
+ 
+ 
   Player( int xx, int yy, int dd, int vv) {
     x = xx;
     y = yy;
     d = dd;
     v = vv;
   }
+  
+  
+  
  
  void simulate() {
  if(Niveau==0) {
@@ -30,7 +35,7 @@
   void display() {
     //ellipse(x, y, d, d);
     if(Niveau==1){
-      background(53,101,77);
+   
     image(img,x-40,y-40,d,d); 
   }
   }
@@ -40,26 +45,43 @@
     x = constrain(x + v*(int(isRight) - int(isLeft)), r, width  - r);//siden
     y = constrain(y + v*(int(isDown)  - int(isUp)),   r, height - r);//op,ned
   }
-  boolean setMove(int k, boolean b) {
+  boolean setMove(int k, boolean b,int player) {
+   
+    if(player ==0)
     switch (k) {
-    case +'W':
+      
     case UP:
       return isUp = b;
  
-    case +'S':
     case DOWN:
       return isDown = b;
  
-    case +'A':
     case LEFT:
       return isLeft = b;
  
-    case +'D':
     case RIGHT:
       return isRight = b;
  
     default:
       return b;
-    }
+    }else if(player ==1)
+    switch (k) {
+      
+    case +'W':
+      return isUp = b;
+ 
+    case +'S':
+      return isDown = b;
+ 
+    case +'A':
+      return isLeft = b;
+ 
+    case +'D':
+      return isRight = b;
+ 
+    default:
+      return b;
+    }else return b;
+   
   }
 }
